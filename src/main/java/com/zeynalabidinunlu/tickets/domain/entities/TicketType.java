@@ -65,11 +65,11 @@ public class TicketType {
 
 	@LastModifiedDate
 	@Column(name = "updated_at", nullable = false)
-	private LocalDateTime updateAt;
+	private LocalDateTime updatedAt;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, description, id, name, price, totalAvailable, updateAt);
+		return Objects.hash(createdAt, description, id, name, price, totalAvailable, updatedAt);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class TicketType {
 		return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(price, other.price) && Objects.equals(totalAvailable, other.totalAvailable)
-				&& Objects.equals(updateAt, other.updateAt);
+				&& Objects.equals(updatedAt, other.updatedAt);
 	}
 
 }
