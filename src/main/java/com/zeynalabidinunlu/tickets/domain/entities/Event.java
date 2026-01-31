@@ -47,15 +47,13 @@ public class Event {
 	private String name;
 
 	@Column(name = "start_time")
-	private LocalDateTime start;
+	private LocalDateTime startTime;
 
 	@Column(name = "end_time")
-	private LocalDateTime end;
+	private LocalDateTime endTime;
 
 	@Column(name = "venue", nullable = false)
 	private String venue;
-
-
 
 	@Column(name = "sales_start")
 	private LocalDateTime salesStart;
@@ -76,8 +74,8 @@ public class Event {
 
 	@ManyToMany(mappedBy = "staffingEvents")
 	private List<User> staff = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private List<TicketType> ticketTypes = new ArrayList<>();
 
 	@CreatedDate
@@ -87,9 +85,10 @@ public class Event {
 	@LastModifiedDate
 	@Column(name = "updated_at", nullable = false)
 	private LocalDateTime updateAt;
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, end, id, name, salesEnd, salesStart, start, status, updateAt, venue);
+		return Objects.hash(createdAt, endTime, id, name, salesEnd, salesStart, startTime, status, updateAt, venue);
 	}
 
 	@Override
@@ -101,11 +100,11 @@ public class Event {
 		if (getClass() != obj.getClass())
 			return false;
 		Event other = (Event) obj;
-		return Objects.equals(createdAt, other.createdAt) && Objects.equals(end, other.end)
+		return Objects.equals(createdAt, other.createdAt) && Objects.equals(endTime, other.endTime)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(salesEnd, other.salesEnd) && Objects.equals(salesStart, other.salesStart)
-				&& Objects.equals(start, other.start) && status == other.status
+				&& Objects.equals(startTime, other.startTime) && status == other.status
 				&& Objects.equals(updateAt, other.updateAt) && Objects.equals(venue, other.venue);
 	}
-	
+
 }
