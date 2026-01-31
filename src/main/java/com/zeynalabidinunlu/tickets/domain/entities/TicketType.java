@@ -1,4 +1,4 @@
-package com.zeynalabidinunlu.tickets.domain;
+package com.zeynalabidinunlu.tickets.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,47 +12,52 @@ import org.springframework.data.annotation.LastModifiedDate;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
-@Data
+@Table(name = "ticket_types")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Builder
+public class TicketType {
 
 	@Id
-	@Column(name = "id", updatable = false, nullable = false)
+	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "email", nullable = false)
-	private String email;
+	@Column(name = "price", nullable = false)
+	private Double price;
 
-	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
-	private List<Event> organizedEvents = new ArrayList<>();
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "total_available")
+	private Integer totalAvailable;
 
-	@ManyToMany
-	@JoinTable(name = "user_attending_events", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
-	private List<Event> attendingEvents = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "event_id")
+	private Event event;
 
-	@ManyToMany
-	@JoinTable(name = "user_staffing_events", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
-	private List<Event> staffingEvents = new ArrayList<>();
+	@OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
+	private List<Ticket> tickets = new ArrayList<>();
 
 	@CreatedDate
 	@Column(name = "created_at", updatable = false, nullable = false)
@@ -63,6 +68,11 @@ public class User {
 	private LocalDateTime updateAt;
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(createdAt, description, id, name, price, totalAvailable, updateAt);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -70,15 +80,11 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
-		return Objects.equals(createdAt, other.createdAt) && Objects.equals(email, other.email)
+		TicketType other = (TicketType) obj;
+		return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(price, other.price) && Objects.equals(totalAvailable, other.totalAvailable)
 				&& Objects.equals(updateAt, other.updateAt);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(createdAt, email, id, name, updateAt);
 	}
 
 }

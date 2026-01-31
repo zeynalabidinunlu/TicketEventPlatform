@@ -1,4 +1,4 @@
-package com.zeynalabidinunlu.tickets.domain;
+package com.zeynalabidinunlu.tickets.domain.entities;
 
 public enum EventStatusEnum {
 

@@ -1,4 +1,4 @@
-package com.zeynalabidinunlu.tickets.domain;
+package com.zeynalabidinunlu.tickets.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
