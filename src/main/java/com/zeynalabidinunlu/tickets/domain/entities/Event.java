@@ -84,11 +84,11 @@ public class Event {
 
 	@LastModifiedDate
 	@Column(name = "updated_at", nullable = false)
-	private LocalDateTime updateAt;
+	private LocalDateTime updatedAt;
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(createdAt, endTime, id, name, salesEnd, salesStart, startTime, status, updateAt, venue);
+		return Objects.hash(createdAt, endTime, id, name, salesEnd, salesStart, startTime, status, updatedAt, venue);
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class Event {
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(salesEnd, other.salesEnd) && Objects.equals(salesStart, other.salesStart)
 				&& Objects.equals(startTime, other.startTime) && status == other.status
-				&& Objects.equals(updateAt, other.updateAt) && Objects.equals(venue, other.venue);
+				&& Objects.equals(updatedAt, other.updatedAt) && Objects.equals(venue, other.venue);
 	}
 
 }
