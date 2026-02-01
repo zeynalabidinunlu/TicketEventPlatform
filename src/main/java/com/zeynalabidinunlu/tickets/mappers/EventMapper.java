@@ -8,7 +8,10 @@ import com.zeynalabidinunlu.tickets.domain.CreateTicketTypeRequest;
 import com.zeynalabidinunlu.tickets.domain.dtos.CreateEventRequestDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.CreateEventResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.CreateTicketTypeRequestDto;
+import com.zeynalabidinunlu.tickets.domain.dtos.ListEventResponseDto;
+import com.zeynalabidinunlu.tickets.domain.dtos.ListEventTicketTypeResponseDto;
 import com.zeynalabidinunlu.tickets.domain.entities.Event;
+import com.zeynalabidinunlu.tickets.domain.entities.TicketType;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EventMapper {
@@ -18,4 +21,9 @@ public interface EventMapper {
 	CreateEventRequest fromDto(CreateEventRequestDto dto);
 
 	CreateEventResponseDto toDto(Event event);
+
+	ListEventTicketTypeResponseDto toDto(TicketType ticketType);
+
+	ListEventResponseDto toListEventResponseDto(Event event);
+
 }

@@ -2,6 +2,9 @@ package com.zeynalabidinunlu.tickets.services.impl;
 
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.zeynalabidinunlu.tickets.domain.CreateEventRequest;
@@ -48,6 +51,12 @@ public class EventServiceImpl implements EventService {
 		eventToCreate.setTicketTypes(ticketTypesToCreate);
 
 		return eventRepository.save(eventToCreate);
+	}
+
+	@Override
+	public Page<Event> listEventsForOrganizer(UUID organizerId, Pageable pageable) {
+		return eventRepository.findByOrganizerId(organizerId, pageable);
+
 	}
 
 }
