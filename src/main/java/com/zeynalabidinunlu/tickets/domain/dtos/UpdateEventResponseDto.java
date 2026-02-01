@@ -1,9 +1,8 @@
-
-package com.zeynalabidinunlu.tickets.domain;
+package com.zeynalabidinunlu.tickets.domain.dtos;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.zeynalabidinunlu.tickets.domain.entities.EventStatusEnum;
 
@@ -14,8 +13,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateEventRequest {
+public class UpdateEventResponseDto {
 
+	private UUID id;
 	private String name;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
@@ -23,6 +23,8 @@ public class CreateEventRequest {
 	private LocalDateTime salesStart;
 	private LocalDateTime salesEnd;
 	private EventStatusEnum status;
-	private List<CreateTicketTypeRequest> ticketTypes = new ArrayList<>();
+	private List<UpdateTicketTypeResponseDto> ticketTypes;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 
 }
