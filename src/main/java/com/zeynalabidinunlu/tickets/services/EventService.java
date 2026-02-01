@@ -7,11 +7,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.zeynalabidinunlu.tickets.domain.CreateEventRequest;
+import com.zeynalabidinunlu.tickets.domain.UpdateEventRequest;
 import com.zeynalabidinunlu.tickets.domain.entities.Event;
 
 public interface EventService {
 
 	Event createEvent(UUID organizerId, CreateEventRequest event);
-	Page<Event> listEventsForOrganizer(UUID organizerId,Pageable pageable);
-	Optional<Event> getEventForOrganizer(UUID organizerId,UUID id);
+
+	Page<Event> listEventsForOrganizer(UUID organizerId, Pageable pageable);
+
+	Optional<Event> getEventForOrganizer(UUID organizerId, UUID id);
+
+	Event updateEventForOrganizer(UUID organizerId, UUID id, UpdateEventRequest event);
 }

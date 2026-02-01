@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.zeynalabidinunlu.tickets.domain.dtos.ErrorDto;
+import com.zeynalabidinunlu.tickets.exceptions.EventNotFoundException;
+import com.zeynalabidinunlu.tickets.exceptions.EventUpdateException;
+import com.zeynalabidinunlu.tickets.exceptions.TicketTypeNotFoundException;
 import com.zeynalabidinunlu.tickets.exceptions.UserNotFoundException;
 
 import jakarta.validation.ConstraintViolationException;
@@ -73,6 +76,43 @@ public class GlobalExceptionHandler {
 		errorDto.setError("An unknown error occured");
 
 		return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler(EventNotFoundException.class)
+	public ResponseEntity<ErrorDto> handleEventNotFoundException(EventNotFoundException ex) {
+
+		log.error("Caught EventNotFoundException", ex);
+
+		ErrorDto errorDto = new ErrorDto();
+
+		errorDto.setError("Event not found");
+
+		return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@ExceptionHandler(TicketTypeNotFoundException.class)
+	public ResponseEntity<ErrorDto> handleTicketTypeNotFoundException(TicketTypeNotFoundException ex) {
+
+		log.error("Caught TicketTypeNotFoundException", ex);
+
+		ErrorDto errorDto = new ErrorDto();
+
+		errorDto.setError("Ticket Type not found");
+
+		return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(EventUpdateException.class)
+	public ResponseEntity<ErrorDto> handleEventUpdateException(EventUpdateException ex) {
+
+		log.error("Caught EventUpdateException", ex);
+
+		ErrorDto errorDto = new ErrorDto();
+
+		errorDto.setError("Unable to update event");
+
+		return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
 	}
 
 }
