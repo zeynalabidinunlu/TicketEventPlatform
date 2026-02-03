@@ -18,6 +18,7 @@ import com.zeynalabidinunlu.tickets.domain.CreateEventRequest;
 import com.zeynalabidinunlu.tickets.domain.UpdateEventRequest;
 import com.zeynalabidinunlu.tickets.domain.UpdateTicketTypeRequest;
 import com.zeynalabidinunlu.tickets.domain.entities.Event;
+import com.zeynalabidinunlu.tickets.domain.entities.EventStatusEnum;
 import com.zeynalabidinunlu.tickets.domain.entities.TicketType;
 import com.zeynalabidinunlu.tickets.domain.entities.User;
 import com.zeynalabidinunlu.tickets.exceptions.EventNotFoundException;
@@ -141,6 +142,12 @@ public class EventServiceImpl implements EventService {
 	@Transactional
 	public void deleteEventForOrganizer(UUID organizerId, UUID id) {
 		getEventForOrganizer(organizerId, id).ifPresent(eventRepository::delete);
+	}
+
+	@Override
+	public Page<Event> listPublishedEvents(Pageable pageable) {
+		return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
+
 	}
 
 }
