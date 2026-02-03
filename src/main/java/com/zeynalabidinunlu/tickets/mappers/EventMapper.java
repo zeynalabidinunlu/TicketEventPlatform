@@ -12,6 +12,8 @@ import com.zeynalabidinunlu.tickets.domain.dtos.CreateEventResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.CreateTicketTypeRequestDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.GetEventDetailsResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.GetEventDetailsTicketTypesResponseDto;
+import com.zeynalabidinunlu.tickets.domain.dtos.GetEventPublishedDetailsResponseDto;
+import com.zeynalabidinunlu.tickets.domain.dtos.GetPublishedEventDetailsTicketTypesResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.ListEventResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.ListEventTicketTypeResponseDto;
 import com.zeynalabidinunlu.tickets.domain.dtos.ListPublishedEventResponseDto;
@@ -48,4 +50,8 @@ public interface EventMapper {
 	UpdateEventResponseDto toUpdateEventResponseDto(Event event);
 	
 	ListPublishedEventResponseDto toListPublishedEventResponseDto(Event event);
+
+	GetPublishedEventDetailsTicketTypesResponseDto toGetPublishedEventDetailsTicketTypesResponseDto(TicketType ticketType);
+	
+	GetEventPublishedDetailsResponseDto toGetEventPublishedDetailsResponseDto(Event event);
 }
